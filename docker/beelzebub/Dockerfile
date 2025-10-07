@@ -1,8 +1,8 @@
-FROM golang:1.23-alpine AS builder
+FROM golang:1.24-alpine AS builder
 #
 ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux
+  CGO_ENABLED=0 \
+  GOOS=linux
 #
 # Install packages
 RUN apk -U add git
@@ -10,9 +10,7 @@ RUN apk -U add git
 WORKDIR /root
 #
 # Build beelzebub
-RUN git clone https://github.com/t3chn0m4g3/beelzebub && \
-    cd beelzebub && \
-    git checkout 0b9aba53ec1671f669d22782758142a1d411b858
+RUN git clone https://github.com/guruh-edi/beelzebub && cd beelzebub
 WORKDIR /root/beelzebub
 RUN go mod download
 RUN go build -o main .
