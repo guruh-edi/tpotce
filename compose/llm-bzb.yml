@@ -1,5 +1,5 @@
 # T-Pot: CUSTOM EDITION
-# Generated on: 2025-10-07 15:58:52
+# Generated on: 2025-10-08 09:42:03
 networks:
   beelzebub_local: null
   nginx_local: null
@@ -57,8 +57,8 @@ services:
       - beelzebub_local
     ports:
       - "22:22"
-      - "80:80"
-    image: ${TPOT_REPO}/beelzebub:${TPOT_VERSION}
+    build:
+      context: ./docker/beelzebub
     pull_policy: ${TPOT_PULL_POLICY}
     environment:
       LLM_MODEL: ${BEELZEBUB_LLM_MODEL}
@@ -158,6 +158,7 @@ services:
       - 127.0.0.1:64296:5601
     image: ${TPOT_REPO}/kibana:${TPOT_VERSION}
     pull_policy: ${TPOT_PULL_POLICY}
+
   map_redis:
     container_name: map_redis
     restart: always
@@ -171,6 +172,7 @@ services:
     image: ${TPOT_REPO}/redis:${TPOT_VERSION}
     pull_policy: ${TPOT_PULL_POLICY}
     read_only: true
+
   map_web:
     container_name: map_web
     restart: always
@@ -187,6 +189,7 @@ services:
       - 127.0.0.1:64299:64299
     image: ${TPOT_REPO}/map:${TPOT_VERSION}
     pull_policy: ${TPOT_PULL_POLICY}
+
   map_data:
     container_name: map_data
     restart: always
@@ -203,6 +206,7 @@ services:
     tty: true
     image: ${TPOT_REPO}/map:${TPOT_VERSION}
     pull_policy: ${TPOT_PULL_POLICY}
+
   nginx:
     container_name: nginx
     restart: always
@@ -232,6 +236,7 @@ services:
       - ${TPOT_DATA_PATH}/nginx/conf/nginxpasswd:/etc/nginx/nginxpasswd:ro
       - ${TPOT_DATA_PATH}/nginx/conf/lswebpasswd:/etc/nginx/lswebpasswd:ro
       - ${TPOT_DATA_PATH}/nginx/log/:/var/log/nginx/
+
   spiderfoot:
     container_name: spiderfoot
     restart: always
