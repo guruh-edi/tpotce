@@ -57,6 +57,10 @@ services:
       - beelzebub_local
     ports:
       - "22:22"
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+      - "8443:8443"
     build:
       context: ./docker/beelzebub
     pull_policy: ${TPOT_PULL_POLICY}
