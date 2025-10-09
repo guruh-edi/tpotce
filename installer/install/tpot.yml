@@ -105,7 +105,7 @@
 # T-Pot - Install recommended, remove conflicting packages #
 ############################################################
 
-- name: T-Pot - Install recommended, remove conflicting packages 
+- name: T-Pot - Install recommended, remove conflicting packages
   hosts: all
   gather_facts: true
   become: true
@@ -152,7 +152,7 @@
 
     - name: Install grc from remote repo (AlmaLinux, Rocky)
       ansible.builtin.dnf:
-        name: 'https://github.com/kriipke/grc/releases/download/1.13.8/grc-1.13.8-1.el7.noarch.rpm'
+        name: "https://github.com/kriipke/grc/releases/download/1.13.8/grc-1.13.8-1.el7.noarch.rpm"
         disable_gpg_check: true
         state: present
       when: ansible_distribution in ["AlmaLinux", "Rocky"]
@@ -336,7 +336,7 @@
       when: ansible_distribution in ["Fedora"]
       tags:
         - "Fedora"
-    
+
     - name: Add Docker repository (RHEL)
       shell: |
         if [ "$(dnf repolist docker-ce-stable)" == "" ];
@@ -357,7 +357,6 @@
       tags:
         - "AlmaLinux"
         - "Rocky"
-
 
 #################################
 # T-Pot - Install Docker Engine #
@@ -388,11 +387,11 @@
     - name: Install Docker Engine packages (AlmaLinux, Debian, Fedora, Raspbian, RHEL, Rocky, Ubuntu)
       package:
         name:
-          - docker-ce 
-          - docker-ce-cli 
+          - docker-ce
+          - docker-ce-cli
           - containerd.io
           - docker-buildx-plugin
-          - docker-compose-plugin 
+          - docker-compose-plugin
         state: latest
         update_cache: yes
       when: ansible_distribution in ["AlmaLinux", "Debian", "Fedora", "Raspbian", "RedHat", "Rocky", "Ubuntu"]
@@ -503,7 +502,7 @@
     - name: Comment out Port(s) in sshd_config, can cause port conflicts on deploy (AlmaLinux, Debian, Fedora, openSUSE Tumbleweed, Raspbian, RHEL, Rocky, Ubuntu)
       ansible.builtin.replace:
         path: /etc/ssh/sshd_config
-        regexp: '^(Port (?!64295$)[0-9]+)'
+        regexp: "^(Port (?!64295$)[0-9]+)"
         replace: '# \1'
       when: ansible_distribution in ["AlmaLinux", "Debian", "Fedora", "openSUSE Tumbleweed", "Raspbian", "RedHat", "Rocky", "Ubuntu"]
       tags:
@@ -591,8 +590,8 @@
     - name: Set SELinux config to permissive (AlmaLinux, Fedora, RHEL, Rocky)
       lineinfile:
         path: /etc/selinux/config
-        regexp: '^SELINUX='
-        line: 'SELINUX=permissive'
+        regexp: "^SELINUX="
+        line: "SELINUX=permissive"
       when: ansible_distribution in ["AlmaLinux", "Fedora", "RedHat", "Rocky"]
       tags:
         - "AlmaLinux"
@@ -640,8 +639,8 @@
     - name: Modify DNSStubListener in resolved.conf (Fedora, Ubuntu)
       lineinfile:
         path: /etc/systemd/resolved.conf
-        regexp: '^.*DNSStubListener=.*'
-        line: 'DNSStubListener=no'
+        regexp: "^.*DNSStubListener=.*"
+        line: "DNSStubListener=no"
         state: present
       when: ansible_distribution in ["Fedora", "Ubuntu"]
       tags:
@@ -783,9 +782,9 @@
 
     - name: Clone / Update T-Pot repository (All)
       git:
-        repo: 'https://github.com/telekom-security/tpotce'
-        dest: '/home/{{ ansible_user_id }}/tpotce/'
-        version: master
+        repo: "https://github.com/guruh-edi/tpotce"
+        dest: "/home/{{ ansible_user_id }}/tpotce/"
+        version: guruh-edi/local
         clone: yes
         update: no
       when: ansible_distribution in ["AlmaLinux", "Debian", "Fedora", "openSUSE Tumbleweed", "Raspbian", "RedHat", "Rocky", "Ubuntu"]
@@ -794,7 +793,7 @@
       become: true
       user:
         name: "{{ ansible_user_id }}"
-        groups: 
+        groups:
           - docker
           - tpot
         append: yes
@@ -822,11 +821,11 @@
     - name: Install systemd service (All)
       become: true
       ansible.builtin.template:
-        src: '/home/{{ ansible_user_id }}/tpotce/installer/install/tpot.service'
-        dest: '/etc/systemd/system/tpot.service'
+        src: "/home/{{ ansible_user_id }}/tpotce/installer/install/tpot.service"
+        dest: "/etc/systemd/system/tpot.service"
         owner: root
         group: root
-        mode: '0755'
+        mode: "0755"
       notify: Reload systemd and enable service
       when: ansible_distribution in ["AlmaLinux", "Debian", "Fedora", "openSUSE Tumbleweed", "Raspbian", "RedHat", "Rocky", "Ubuntu"]
 
@@ -865,6 +864,6 @@
         user: root
         minute: "{{ random_minute }}"
         hour: "{{ random_hour }}"
-        job: "bash -c 'systemctl stop tpot.service && docker container prune -f; docker image prune -f; docker volume prune -f; /usr/sbin/shutdown -r +1 \"T-Pot Daily Reboot\"'"
+        job: 'bash -c ''systemctl stop tpot.service && docker container prune -f; docker image prune -f; docker volume prune -f; /usr/sbin/shutdown -r +1 "T-Pot Daily Reboot"'''
         state: present
       when: ansible_distribution in ["AlmaLinux", "Debian", "Fedora", "openSUSE Tumbleweed", "Raspbian", "RedHat", "Rocky", "Ubuntu"]
