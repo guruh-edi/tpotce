@@ -55,9 +55,9 @@ services:
     image: ${TPOT_REPO}/beelzebub:${TPOT_VERSION}
     pull_policy: ${TPOT_PULL_POLICY}
     environment:
+      LLM_PROVIDER: ${BEELZEBUB_LLM_PROVIDER}
       LLM_MODEL: ${BEELZEBUB_LLM_MODEL}
       LLM_HOST: ${BEELZEBUB_LLM_HOST}
-      OLLAMA_MODEL: ${BEELZEBUB_OLLAMA_MODEL}
     read_only: true
     volumes:
       - ${TPOT_DATA_PATH}/beelzebub/key:/opt/beelzebub/configurations/key
