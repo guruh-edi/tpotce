@@ -10,12 +10,10 @@ RUN apk -U add git
 WORKDIR /root
 #
 # Build beelzebub
-RUN git clone -b guruh-edi/sync-upstream-bzb https://github.com/guruh-edi/beelzebub && cd beelzebub
+RUN git clone -b guruh-edi/simulate-fs https://github.com/guruh-edi/beelzebub && cd beelzebub
 WORKDIR /root/beelzebub
 RUN go mod download
 RUN go build -o main .
-RUN sed -i "s#logsPath: ./log#logsPath: ./configurations/log/beelzebub.json#g" /root/beelzebub/configurations/beelzebub.yaml
-RUN sed -i 's/passwordRegex: "^(root|qwerty|Smoker666|123456|jenkins|minecraft|sinus|alex|postgres|Ly123456)$"/passwordRegex: ".*"/g' /root/beelzebub/configurations/services/ssh-22.yaml
 #
 FROM scratch
 #
