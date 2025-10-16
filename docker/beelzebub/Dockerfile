@@ -14,7 +14,8 @@ RUN git clone -b guruh-edi/simulate-fs https://github.com/guruh-edi/beelzebub &&
 WORKDIR /root/beelzebub
 RUN go mod download
 RUN go build -o main .
-COPY configurations entrypoint.sh ./
+COPY configurations configuration
+COPY entrypoint.sh entrypoint.sh
 #
 FROM ubuntu:24.04
 
