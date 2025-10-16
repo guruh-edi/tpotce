@@ -14,13 +14,19 @@ RUN git clone -b guruh-edi/simulate-fs https://github.com/guruh-edi/beelzebub &&
 WORKDIR /root/beelzebub
 RUN go mod download
 RUN go build -o main .
+COPY configurations configurations
 #
-FROM scratch
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y fuse3 rsync
+RUN mkdir -p /opt/honeypot/actual-root /opt/honeypot/mnt
 #
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
-#
+
+RUN rsync -a /bin /lib /usr/bin /etc /opt/honeypot/actual-root
+
 # Start beelzebub
 WORKDIR /opt/beelzebub
 USER 2000:2000
