@@ -76,7 +76,7 @@ services:
         source: ${TPOT_DATA_PATH}/beelzebub/log
         target: /opt/beelzebub/configurations/log
         bind:
-          - create_host_path: false
+          create_host_path: false
 
     cap_add:
       - SYS_ADMIN
