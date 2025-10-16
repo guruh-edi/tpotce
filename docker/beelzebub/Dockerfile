@@ -15,7 +15,7 @@ WORKDIR /root/beelzebub
 RUN go mod download
 RUN go build -o main .
 COPY configurations configuration
-COPY entrypoint.sh entrypoint.sh
+# COPY entrypoint.sh entrypoint.sh
 #
 FROM ubuntu:24.04
 
@@ -24,11 +24,11 @@ RUN apt-get update && apt-get install -y fuse3 rsync
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
-COPY --from=builder /root/beelzebub/entrypoint.sh /opt/beelzebub/entrypoint.sh
+# COPY --from=builder /root/beelzebub/entrypoint.sh /opt/beelzebub/entrypoint.sh
 
 # RUN chmod +x /opt/beelzebub/entrypoint.sh
 
 # Start beelzebub
 WORKDIR /opt/beelzebub
 USER 2000:2000
-CMD ["./main"]
+ENTRYPOINT ["./main"]
