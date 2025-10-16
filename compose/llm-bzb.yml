@@ -71,7 +71,13 @@ services:
     volumes:
       - ${TPOT_DATA_PATH}/beelzebub/key:/opt/beelzebub/configurations/key
       - ${TPOT_DATA_PATH}/beelzebub/log:/opt/beelzebub/configurations/log
-      - ${TPOT_DATA_PATH}/beelzebub/mnt:/opt/beelzebub/mnt
+      # - ${TPOT_DATA_PATH}/beelzebub/mnt:/opt/beelzebub/mnt
+      - type: bind
+        source: ${TPOT_DATA_PATH}/beelzebub/log
+        target: /opt/beelzebub/configurations/log
+        bind:
+          - create_host_path: false
+
     cap_add:
       - SYS_ADMIN
     devices:
