@@ -73,8 +73,8 @@ services:
       - ${TPOT_DATA_PATH}/beelzebub/log:/opt/beelzebub/configurations/log
       # - ${TPOT_DATA_PATH}/beelzebub/mnt:/opt/beelzebub/mnt
       - type: bind
-        source: ${TPOT_DATA_PATH}/beelzebub/log
-        target: /opt/beelzebub/configurations/log
+        source: ${TPOT_DATA_PATH}/beelzebub/mnt
+        target: /opt/beelzebub/configurations/mnt
         bind:
           create_host_path: false
 
