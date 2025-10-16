@@ -19,15 +19,15 @@ COPY configurations configurations
 FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y fuse3 rsync
-RUN mkdir -p /opt/honeypot/actual-root /opt/honeypot/mnt
-#
+
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
+COPY --from=builder /root/beelzebub/entrypoint.sh /opt/beelzebub/entrypoint.sh
 
-RUN rsync -a /bin /lib /usr/bin /etc /opt/honeypot/actual-root
+RUN chmod +x /opt/beelzebub/entrypoint.sh
 
 # Start beelzebub
 WORKDIR /opt/beelzebub
 USER 2000:2000
-ENTRYPOINT ["./main"]
+CMD ["./entrypoint.sh"]
