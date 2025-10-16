@@ -72,7 +72,6 @@ services:
     volumes:
       - ${TPOT_DATA_PATH}/beelzebub/key:/opt/beelzebub/configurations/key
       - ${TPOT_DATA_PATH}/beelzebub/log:/opt/beelzebub/configurations/log
-      - /opt/honeypot/actual-root:/
     cap_add:
       - SYS_ADMIN
     devices:
