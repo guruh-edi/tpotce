@@ -304,7 +304,7 @@ echo "###                   Requires Ollama (recommended) or ChatGPT subscriptio
 echo
 while true; do
   if [[ -z "$myTPOT_TYPE" ]]; then
-    read -p "### Install Type? (h/s/l/i/m/t) " myTPOT_TYPE
+    read -p "### Install Type? (h/s/l/i/m/t/z) " myTPOT_TYPE
   fi
 
   case "${myTPOT_TYPE}" in
