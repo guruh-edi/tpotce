@@ -73,7 +73,7 @@ services:
       - ${TPOT_DATA_PATH}/beelzebub/log:/opt/beelzebub/configurations/log
       # - ${TPOT_DATA_PATH}/beelzebub/mnt:/opt/beelzebub/mnt
       - type: bind
-        source: ${TPOT_DATA_PATH}/beelzebub/mnt
+        source: /home/ediguruh/beelzebub/mount-point
         target: /opt/beelzebub/mnt
         bind:
           create_host_path: false
