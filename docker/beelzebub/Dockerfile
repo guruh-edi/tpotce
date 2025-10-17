@@ -27,8 +27,8 @@ COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 
 RUN useradd -m -s /bin/bash bzb
 
-RUN chmod +x /usr/bin/bash
-RUN chmod +x /usr/bin/sh
+RUN chmod 755 /usr/bin/bash
+RUN chmod 755 /usr/bin/sh
 
 # COPY --from=builder /root/beelzebub/entrypoint.sh /opt/beelzebub/entrypoint.sh
 
