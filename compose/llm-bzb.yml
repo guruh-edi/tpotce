@@ -84,6 +84,7 @@ services:
       - /dev/fuse
     security_opt:
       - apparmor:unconfined
+      - seccomp:unconfined
 
   fatt:
     container_name: fatt
