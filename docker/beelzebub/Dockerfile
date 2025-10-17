@@ -19,16 +19,14 @@ COPY configurations configurations
 #
 FROM ubuntu:24.04
 
-RUN apt-get update && apt-get install -y fuse3 rsync
-
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 
-RUN useradd -m -s /bin/bash bzb
-
-RUN chmod 755 /usr/bin/bash
-RUN chmod 755 /usr/bin/sh
+# RUN useradd -m -s /bin/bash bzb
+#
+# RUN chmod 755 /usr/bin/bash
+# RUN chmod 755 /usr/bin/sh
 
 # COPY --from=builder /root/beelzebub/entrypoint.sh /opt/beelzebub/entrypoint.sh
 
@@ -36,5 +34,5 @@ RUN chmod 755 /usr/bin/sh
 
 # Start beelzebub
 WORKDIR /opt/beelzebub
-USER bzb:bzb
+USER 2000:2000
 ENTRYPOINT ["./main"]
