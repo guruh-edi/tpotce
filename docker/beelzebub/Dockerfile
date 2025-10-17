@@ -35,4 +35,4 @@ COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 # Start beelzebub
 WORKDIR /opt/beelzebub
 USER 2000:2000
-ENTRYPOINT ["./main"]
+CMD ["./main"]
