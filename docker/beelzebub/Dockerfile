@@ -23,6 +23,9 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 
+RUN useradd -m -u 2000 -s /bin/bash bzb
+RUN chown -R bzb:bzb /opt/beelzebub
+
 # RUN useradd -m -s /bin/bash bzb
 #
 # RUN chmod 755 /usr/bin/bash
@@ -34,5 +37,5 @@ COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 
 # Start beelzebub
 WORKDIR /opt/beelzebub
-USER 2000:2000
+USER bzb
 CMD ["./main"]
