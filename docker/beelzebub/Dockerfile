@@ -23,8 +23,8 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 
-RUN useradd -m -u 2000 -s /bin/bash bzb
-RUN chown -R bzb:bzb /opt/beelzebub
+RUN useradd -m -u 2000 -s /usr/bin/bash bzb
+RUN chown -R 2000:2000 /opt/beelzebub
 
 # RUN useradd -m -s /bin/bash bzb
 #
@@ -37,5 +37,5 @@ RUN chown -R bzb:bzb /opt/beelzebub
 
 # Start beelzebub
 WORKDIR /opt/beelzebub
-USER bzb
+USER 2000
 CMD ["./main"]
