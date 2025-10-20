@@ -26,8 +26,8 @@ COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 RUN useradd -m -u 2000 -s /usr/bin/bash bzb
 RUN chown -R 2000:2000 /opt/beelzebub
 
-RUN addgroup -g 2000 bzb && \
-  adduser -S -H -s /bin/bash -u 2000 -D -g 2000 bzb && \
+RUN groupadd -g 2000 bzb && \
+  useradd -s /bin/bash -u 2000 -D -g 2000 bzb && \
   chown bzb:bzb -R /opt/beelzebub
 
 # RUN useradd -m -s /bin/bash bzb
