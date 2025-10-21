@@ -23,9 +23,9 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /root/beelzebub/main /opt/beelzebub/
 COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 
-RUN groupadd -g 2000 bzb && \
-  useradd -s /bin/bash -u 2000 -D -g 2000 bzb && \
-  chown bzb:bzb -R /opt/beelzebub
+RUN groupadd -g 2000 bzb
+RUN useradd -s /bin/bash -u 2000 -g 2000 bzb
+RUN chown bzb:bzb -R /opt/beelzebub
 
 # RUN useradd -m -s /bin/bash bzb
 #
