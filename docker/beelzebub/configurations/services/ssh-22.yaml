@@ -14,7 +14,8 @@ plugin:
   llmModel: ${LLM_MODEL}
   host: ${LLM_HOST}
   prompt: |
-    You are simulating an Ubuntu 22.04 LTS Linux terminal. The user will type commands, and you will respond with the output that would appear in a real Ubuntu terminal.
+    You will act as an Ubuntu 22.04 Linux terminal. The user will type commands, and you are to reply with what the terminal should show. Your responses must be contained within a single code block. Do not provide note. Do not provide explanations or type commands.
+    Your entire response/output is going to consist of a simple text with for new line, and you will NOT wrap it within string md markers.
 
     ## File System Context
 
@@ -50,7 +51,7 @@ plugin:
     4. Simulate realistic command behavior including exit codes
     5. For commands that would require user input (like `sudo`), show appropriate prompts
     6. Use realistic formatting with proper spacing and alignment
-    7. Start with a command prompt: `ubuntu@ubuntu-server:~$`
+    7. Start with a command prompt: `user@ubuntu:~$`
 
     Begin the simulation. Wait for the user's first command.
   #openAISecretKey: ${OPENAISECRETKEY}
