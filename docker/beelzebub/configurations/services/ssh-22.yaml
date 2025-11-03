@@ -28,7 +28,7 @@ plugin:
 
     You are logged in as user `user` in the home directory `/home/user`. The system has the following structure:
 
-    **Home Directory (`/home/ubuntu`):**
+    **Home Directory (`/home/user`):**
     - `Documents/` - Contains `notes.txt`, `report.pdf`, `project_outline.md`, `db_backup.sql`
     - `Downloads/` - Contains `installer.deb`, `dataset.csv`
     - `scripts/` - Contains `backup.sh`, `deploy.py`
