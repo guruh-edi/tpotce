@@ -39,5 +39,6 @@ COPY --from=builder /root/beelzebub/configurations /opt/beelzebub/configurations
 # RUN chmod +x /opt/beelzebub/main
 # Start beelzebub
 WORKDIR /opt/beelzebub
-USER bzb:bzb
+# USER bzb:bzb
+USER 2000:2000
 CMD ["./main"]
