@@ -72,11 +72,11 @@ services:
       - ${TPOT_DATA_PATH}/beelzebub/key:/opt/beelzebub/configurations/key
       - ${TPOT_DATA_PATH}/beelzebub/log:/opt/beelzebub/configurations/log
       # - ${TPOT_DATA_PATH}/beelzebub/mnt:/opt/beelzebub/mnt
-      - type: bind
-        source: ~/beelzebub/mount-point
-        target: /opt/beelzebub/mnt
-        bind:
-          create_host_path: false
+      # - type: bind
+      #   source: ~/beelzebub/mount-point
+      #   target: /opt/beelzebub/mnt
+      #   bind:
+      #     create_host_path: false
 
     cap_add:
       - SYS_ADMIN
