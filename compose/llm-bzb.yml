@@ -86,52 +86,52 @@ services:
       - apparmor:unconfined
       - seccomp:unconfined
 
-  fatt:
-    container_name: fatt
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-      - SYS_NICE
-      - NET_RAW
-    image: ${TPOT_REPO}/fatt:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    volumes:
-      - ${TPOT_DATA_PATH}/fatt/log:/opt/fatt/log
-
-  p0f:
-    container_name: p0f
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    network_mode: host
-    image: ${TPOT_REPO}/p0f:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    read_only: true
-    volumes:
-      - ${TPOT_DATA_PATH}/p0f/log:/var/log/p0f
-
-  suricata:
-    container_name: suricata
-    restart: always
-    depends_on:
-      tpotinit:
-        condition: service_healthy
-    environment:
-      - OINKCODE=${OINKCODE:-OPEN}
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-      - SYS_NICE
-      - NET_RAW
-    image: ${TPOT_REPO}/suricata:${TPOT_VERSION}
-    pull_policy: ${TPOT_PULL_POLICY}
-    volumes:
-      - ${TPOT_DATA_PATH}/suricata/log:/var/log/suricata
+  # fatt:
+  #   container_name: fatt
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   network_mode: host
+  #   cap_add:
+  #     - NET_ADMIN
+  #     - SYS_NICE
+  #     - NET_RAW
+  #   image: ${TPOT_REPO}/fatt:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   volumes:
+  #     - ${TPOT_DATA_PATH}/fatt/log:/opt/fatt/log
+  #
+  # p0f:
+  #   container_name: p0f
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   network_mode: host
+  #   image: ${TPOT_REPO}/p0f:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   read_only: true
+  #   volumes:
+  #     - ${TPOT_DATA_PATH}/p0f/log:/var/log/p0f
+  #
+  # suricata:
+  #   container_name: suricata
+  #   restart: always
+  #   depends_on:
+  #     tpotinit:
+  #       condition: service_healthy
+  #   environment:
+  #     - OINKCODE=${OINKCODE:-OPEN}
+  #   network_mode: host
+  #   cap_add:
+  #     - NET_ADMIN
+  #     - SYS_NICE
+  #     - NET_RAW
+  #   image: ${TPOT_REPO}/suricata:${TPOT_VERSION}
+  #   pull_policy: ${TPOT_PULL_POLICY}
+  #   volumes:
+  #     - ${TPOT_DATA_PATH}/suricata/log:/var/log/suricata
 
   elasticsearch:
     container_name: elasticsearch
