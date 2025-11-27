@@ -235,7 +235,7 @@ fi
 # Download tpot.yml if not found locally
 if [ ! -f installer/install/tpot.yml ] && [ ! -f tpot.yml ]; then
   echo "### Now downloading T-Pot Ansible Installation Playbook ... "
-  wget -qO tpot.yml https://raw.githubusercontent.com/guruh-edi/tpotce/guruh-edi/local/installer/install/tpot.yml
+  wget -qO tpot.yml https://raw.githubusercontent.com/opsnowsecurity/tpotce/guruh-edi/local/installer/install/tpot.yml
   myANSIBLE_TPOT_PLAYBOOK="tpot.yml"
   echo
 else
