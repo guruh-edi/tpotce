@@ -10,7 +10,7 @@ RUN apk -U add git
 WORKDIR /root
 #
 # Build beelzebub
-RUN git clone -b guruh-edi/simulate-fs https://github.com/guruh-edi/beelzebub && cd beelzebub
+RUN git clone -b guruh-edi/simulate-fs https://github.com/opsnowsecurity/beelzebub && cd beelzebub
 WORKDIR /root/beelzebub
 RUN go mod download
 RUN go build -o main .
